@@ -13,6 +13,7 @@ int main(void)
 		return (1);
 	}
 
+	/* Since fork() will always return 0, we can sleep the child process a bit */
 	if (pid == 0)
 	{
 		sleep(40);
@@ -21,7 +22,7 @@ int main(void)
 	else
 	{
 		ppid = getppid();
-		printf("[%u]:Parent Process Running\n", ppid);
+		printf("[%u]:parent process running\n", ppid);
 	}
 	return (0);
 }
