@@ -7,11 +7,11 @@
 
 #define BUFFSIZE 1024
 
-/** 
+/**
  * main- Entry Point
  * simple_shell- A simulation of the shell
  * Return: Always (0) on Success
- * 
+ *
  */
 int main(void)
 {
@@ -45,7 +45,7 @@ int main(void)
 			perror("Error: Cannot Run Command.\n");
 			exit(1);
 		}
-		
+
 		/* If child process is successful, execute command */
 		if (child_proc == 0)
 		{
@@ -63,7 +63,7 @@ int main(void)
 			wait(NULL);
 			if (strcmp(argv[0], "/bin/exit") == 0)
 			{
-				printf("User Terminated\n");	
+				printf("User Terminated\n");
 				exit(1);
 			}
 		}
