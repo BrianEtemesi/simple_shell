@@ -12,7 +12,7 @@
  * Return: Nothing
  */
 
-void proc_exec(char *buffer, char *cmd, char *argv[])
+void proc_exec(char *cmd, char *argv[])
 {
 	pid_t child_proc;
 
@@ -47,14 +47,18 @@ void proc_exec(char *buffer, char *cmd, char *argv[])
 void print_shell(char *buffer, size_t size)
 {
 	int read = 0;
-	char *cmd;
+	char *cmd = "";
 	char pathname[BUFFSIZE];
+	char *argv[3];
+	argv[0] = cmd;
+	argv[1] = NULL;
+	argv[2] = NULL;
+
 
 	while (strcmp(buffer, "exit") != 0 && read != -1)
 	{
 		/* Reset Pathname */
 		strcpy(pathname, "/bin/");
-		cmd = "";
 
 		printf("$: ");
 
@@ -66,10 +70,9 @@ void print_shell(char *buffer, size_t size)
 
 		/* Concatenate to get full command e.g., /bin/ls */
 		cmd = strcat(pathname, buffer);
-		char *argv[] = {cmd, NULL, NULL};
 
 		/* Execute process */
-		proc_exec(buffer, cmd, argv);
+		proc_exec(cmd, argv);
 	}
 }
 #endif /* FUNC_H */
