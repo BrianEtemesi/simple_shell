@@ -1,4 +1,5 @@
 #include "shell.h"
+#include "func.h"
 
 /**
  * main- Entry Point
@@ -22,14 +23,6 @@ int main(void)
 	if (strcmp(buffer, "exit") == 0)
 		exit(1);
 	else
-	{
-		while (strcmp(buffer, "exit") != 0)
-		{
-			printf("$: ");
-			read = getline(&buffer, &size, stdin);
-			buffer[read - 1] = '\0';
-			printf("Entered Buffer: [%s]\n", buffer);
-		}
-	}
+		print_shell(buffer, size);	
 	return (0);
 }
