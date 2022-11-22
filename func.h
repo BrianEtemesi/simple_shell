@@ -23,10 +23,11 @@ void proc_exec(char *buffer, char *cmd, char *argv[])
 		exit(1);
 	}
 	/* If creation was successful, execute command */
+	printf("Length of buffer: [%lu]\n", strlen(buffer));
 	if (child_proc == 0)
 	{
 		if (execve(cmd, argv, NULL) == -1)
-			printf("Error. Command [%s] not found\n", buffer);
+			exit(EXIT_FAILURE);
 	}
 	/* Return to parent process */
 	else
