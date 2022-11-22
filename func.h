@@ -58,7 +58,7 @@ void print_shell(char *buffer, size_t size)
 	while (strcmp(buffer, "exit") != 0 && read != -1)
 	{
 		/* Reset Pathname */
-		strcpy(pathname, "/bin/");
+		strcpy(pathname, "");
 
 		printf("$: ");
 
@@ -70,6 +70,7 @@ void print_shell(char *buffer, size_t size)
 
 		/* Concatenate to get full command e.g., /bin/ls */
 		cmd = strcat(pathname, buffer);
+		printf("cmd : [%s]\n", cmd);
 
 		/* Execute process */
 		proc_exec(cmd, argv);
