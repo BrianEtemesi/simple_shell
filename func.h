@@ -15,6 +15,7 @@ void proc_exec(char *cmd, char *argv[])
 {
 	pid_t child_proc;
 
+	printf("Shell Project\n");
 	printf("Bash parent Process: [%d]\n", getppid());
 	/* Check to see if we have exit */
 	if (strcmp(cmd, "/bin/exit") == 0)
