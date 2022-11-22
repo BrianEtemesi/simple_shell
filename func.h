@@ -15,16 +15,13 @@ void proc_exec(char *cmd, char *argv[])
 {
 	pid_t child_proc;
 
-	printf("Bash parent Process: [%d]\n", getppid());
 	child_proc = fork();
 	/* If Child process is created successfully, proceed to execute */
 	if (child_proc == 0)
 	{
-		printf("Child Process started: [%d]\n", getpid());
 		if (execve(cmd, argv, NULL) == -1)
 		{
 			printf("Command Not Found\n");
-			exit(EXIT_FAILURE);
 		}
 	}
 	/* Handle error */
@@ -37,7 +34,6 @@ void proc_exec(char *cmd, char *argv[])
 	else
 	{
 		wait(NULL);
-		printf("Bash parent Process: [%d] and id [%d]\n", getppid(), child_proc);
 	}
 }
 
@@ -78,7 +74,7 @@ void print_shell(char *buffer, size_t size)
 		/* Concatenate to get full command e.g., /bin/ls */
 		cmd = strcat(pathname, buffer);
 		if (strcmp(cmd, "exit") == 0)
-				exit(1);
+			exit(1);
 
 		/* Execute process */
 		proc_exec(cmd, argv);
