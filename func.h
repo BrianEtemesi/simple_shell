@@ -51,7 +51,7 @@ void print_shell(char *buffer, size_t size)
 	char *cmd;
 	char pathname[BUFFSIZE];
 
-	while (strcmp(buffer, "exit") != 0)
+	while (strcmp(buffer, "exit") != 0 && read != -1)
 	{
 		strcpy(pathname, "/bin/");
 		cmd = "";
