@@ -10,4 +10,7 @@
 
 #define BUFFSIZE 1024
 
+void proc_exec(char *buffer, char *cmd, char *argv[]);
+void print_shell(char *buffer, size_t size);
+
 #endif /* SHELL_H */
