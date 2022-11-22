@@ -15,14 +15,7 @@ int main(void)
 	/* Allocate space to buffer */
 	buffer = malloc(sizeof(char) * BUFFSIZE);
 
-	/* Prompt user for input */
-	printf("Enter Something: ");
+	print_shell(buffer, size);
 
-	/* Get user's line */
-	read = getline(&buffer, &size, stdin);
-	if (strcmp(buffer, "exit") == 0)
-		exit(1);
-	else
-		print_shell(buffer, size);	
 	return (0);
 }
