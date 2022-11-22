@@ -23,7 +23,6 @@ void proc_exec(char *buffer, char *cmd, char *argv[])
 		exit(1);
 	}
 	/* If creation was successful, execute command */
-	printf("Length of buffer: [%lu]\n", strlen(buffer));
 	if (child_proc == 0)
 	{
 		if (execve(cmd, argv, NULL) == -1)
@@ -53,16 +52,23 @@ void print_shell(char *buffer, size_t size)
 
 	while (strcmp(buffer, "exit") != 0 && read != -1)
 	{
+		/* Reset Pathname */
 		strcpy(pathname, "/bin/");
 		cmd = "";
 
 		printf("$: ");
+
+		/* Read will return no. of bytes read. -1 if EOF */
 		read = getline(&buffer, &size, stdin);
+
+		/* Remove newline read by getline ()*/
 		buffer[read - 1] = '\0';
+
+		/* Concatenate to get full command e.g., /bin/ls */
 		cmd = strcat(pathname, buffer);
 		char *argv[] = {cmd, NULL, NULL};
 
-		printf("Entered Buffer: [%s]\n", buffer);
+		/* Execute process */
 		proc_exec(buffer, cmd, argv);
 	}
 }
