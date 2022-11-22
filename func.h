@@ -59,31 +59,37 @@ void proc_exec(char *cmd, char *argv[])
 void print_shell(char *buffer, size_t size)
 {
 	int read = 0;
-	char *cmd = "";
-	char pathname[BUFFSIZE];
+	char pathname[BUFFSIZE], cmd[BUFFSIZE];
 	char *argv[3];
 
 	argv[0] = cmd;
 	argv[1] = NULL;
 	argv[2] = NULL;
 
+	buffer = (char *)malloc(sizeof(char) * BUFFSIZE);
 
-	while (strcmp(buffer, "exit") != 0 && read != -1)
+	while (strcmp(buffer, "exit") != 0)
 	{
 		printf("Entering while loop\n");
 		/* Reset Pathname */
 		strcpy(pathname, "/bin/");
+		strcpy(cmd, "");
 
 		printf("$: ");
 
 		/* Read will return no. of bytes read. -1 if EOF */
 		read = getline(&buffer, &size, stdin);
-		fflush(stdout);
+
+		/* Handle EOF or Ctrl + D */
+		if (read == -1)
+			exit(1);
+
 		/* Remove newline read by getline ()*/
 		buffer[read - 1] = '\0';
 
 		/* Concatenate to get full command e.g., /bin/ls */
-		cmd = strcat(pathname, buffer);
+		strcpy(cmd, strcat(pathname, buffer));
+		printf("command sent : [%s]\n", cmd);
 
 		/* Execute process */
 		printf("Proceeding to execute within while\n");
