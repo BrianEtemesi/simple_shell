@@ -5,7 +5,6 @@
 
 /**
  * proc_exec- A function that hanldes process execution
- * @buffer: String in buffer
  * @cmd: Command passed (e.g., bin/ls)
  * @argv: Argument Vector Array
  *
@@ -50,6 +49,7 @@ void print_shell(char *buffer, size_t size)
 	char *cmd = "";
 	char pathname[BUFFSIZE];
 	char *argv[3];
+
 	argv[0] = cmd;
 	argv[1] = NULL;
 	argv[2] = NULL;
