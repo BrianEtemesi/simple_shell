@@ -26,7 +26,10 @@ void proc_exec(char *cmd, char *argv[])
 	if (child_proc == 0)
 	{
 		if (execve(cmd, argv, NULL) == -1)
+		{
+			printf("Command Not Found\n");
 			exit(EXIT_FAILURE);
+		}
 	}
 	/* Return to parent process */
 	else
@@ -70,7 +73,8 @@ void print_shell(char *buffer, size_t size)
 
 		/* Concatenate to get full command e.g., /bin/ls */
 		cmd = strcat(pathname, buffer);
-		printf("cmd : [%s]\n", cmd);
+		if (strcmp(cmd, "exit") == 0)
+				exit(1);
 
 		/* Execute process */
 		proc_exec(cmd, argv);
