@@ -61,7 +61,7 @@ void print_shell(char *buffer, size_t size)
 	while (strcmp(buffer, "exit") != 0 && read != -1)
 	{
 		/* Reset Pathname */
-		strcpy(pathname, "/bin/");
+		strcpy(pathname, "");
 
 		printf("$: ");
 
