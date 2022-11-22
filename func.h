@@ -5,6 +5,9 @@
 
 /**
  * proc_exec- A function that hanldes process execution
+ * @buffer: String in buffer
+ * @cmd: Command passed (e.g., bin/ls)
+ * @argv: Argument Vector Array
  *
  * Return: Nothing
  */
@@ -35,6 +38,8 @@ void proc_exec(char *buffer, char *cmd, char *argv[])
 
 /**
  * print_shell- Function that prints a shell to stdout
+ * @buffer: String in buffer
+ * @size: Size to print to buffer using getline
  *
  * Return: Nothing
  */
@@ -57,7 +62,7 @@ void print_shell(char *buffer, size_t size)
 		char *argv[] = {cmd, NULL, NULL};
 
 		printf("Entered Buffer: [%s]\n", buffer);
-		proc_exec(buffer, cmd, argv);	
+		proc_exec(buffer, cmd, argv);
 	}
 }
 #endif /* FUNC_H */
