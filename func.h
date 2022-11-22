@@ -14,17 +14,20 @@
 void proc_exec(char *cmd, char *argv[])
 {
 	pid_t child_proc;
-
 	/* Check to see if we have exit */
 	if (strcmp(cmd, "exit") == 0)
+	{
 		exit(1);
+	}
 
 	child_proc = fork();
 	/* If Child process is created successfully, proceed to execute */
 	if (child_proc == 0)
 	{
 		if (execve(cmd, argv, NULL) == -1)
+		{
 			printf("Command Not Found\n");
+		}
 
 	}
 	/* Handle error */
@@ -35,7 +38,9 @@ void proc_exec(char *cmd, char *argv[])
 	}
 	/* Return to parent process */
 	else
+	{
 		wait(NULL);
+	}
 }
 
 
