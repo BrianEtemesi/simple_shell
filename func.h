@@ -15,25 +15,29 @@ void proc_exec(char *cmd, char *argv[])
 {
 	pid_t child_proc;
 
+	printf("Bash parent Process: [%d]\n", getppid());
 	child_proc = fork();
-	if (child_proc == -1)
-	{
-		perror("Error\n");
-		exit(1);
-	}
-	/* If creation was successful, execute command */
+	/* If Child process is created successfully, proceed to execute */
 	if (child_proc == 0)
 	{
+		printf("Child Process started: [%d]\n", getpid());
 		if (execve(cmd, argv, NULL) == -1)
 		{
 			printf("Command Not Found\n");
 			exit(EXIT_FAILURE);
 		}
 	}
+	/* Handle error */
+	else if (child_proc == -1)
+	{
+		perror("Error\n");
+		exit(1);
+	}
 	/* Return to parent process */
 	else
 	{
 		wait(NULL);
+		printf("Bash parent Process: [%d] and id [%d]\n", getppid(), child_proc);
 	}
 }
 
@@ -61,13 +65,13 @@ void print_shell(char *buffer, size_t size)
 	while (strcmp(buffer, "exit") != 0 && read != -1)
 	{
 		/* Reset Pathname */
-		strcpy(pathname, "");
+		strcpy(pathname, "/bin/");
 
 		printf("$: ");
 
 		/* Read will return no. of bytes read. -1 if EOF */
 		read = getline(&buffer, &size, stdin);
-
+		fflush(stdout);
 		/* Remove newline read by getline ()*/
 		buffer[read - 1] = '\0';
 
