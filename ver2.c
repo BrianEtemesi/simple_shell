@@ -9,7 +9,6 @@
 int main(void)
 {
 	char *buffer;
-	int read = 0;
 	size_t size = 40;
 
 	/* Allocate space to buffer */
