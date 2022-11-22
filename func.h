@@ -16,7 +16,7 @@ void proc_exec(char *cmd, char *argv[])
 	pid_t child_proc;
 
 	/* Check to see if we have exit */
-	if (strcmp(cmd, "/bin/exit") == 0)
+	if (strcmp(cmd, "exit") == 0)
 	{
 		exit(1);
 	}
@@ -65,7 +65,7 @@ void print_shell(char *buffer, size_t size)
 	while (strcmp(buffer, "exit") != 0 && read != -1)
 	{
 		/* Reset Pathname */
-		strcpy(pathname, "/bin/");
+		strcpy(pathname, "");
 		strcpy(cmd, "");
 
 		printf("$: ");
