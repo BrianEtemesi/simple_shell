@@ -44,8 +44,10 @@ int proc_exec(char *cmd, char *argv[])
 		if (wait(&status) == -1)
 		{
 			perror("Error waiting for child id\n");
+			return (-1);
 		}
-		return (0);
+		else
+			return (0);
 	}
 	return (0);
 }
@@ -95,10 +97,12 @@ void print_shell(char *buffer, size_t size)
 		/* Execute process */
 		if (proc_exec(cmd, argv) == 0)
 		{
-			printf("Successfully finished\n");
 			exit(1);
 		}
-		printf("Post Execution \n");
+		else
+		{
+			exit(1);
+		}
 	}
 }
 #endif /* FUNC_H */
