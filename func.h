@@ -11,7 +11,7 @@
  * Return: Nothing
  */
 
-void proc_exec(char *cmd, char *argv[])
+int proc_exec(char *cmd, char *argv[])
 {
 	pid_t child_proc;
 	int status;
@@ -45,7 +45,9 @@ void proc_exec(char *cmd, char *argv[])
 		{
 			perror("Error waiting for child id\n");
 		}
+		return (0);
 	}
+	return (0);
 }
 
 
@@ -91,7 +93,12 @@ void print_shell(char *buffer, size_t size)
 		strcpy(cmd, strcat(pathname, buffer));
 
 		/* Execute process */
-		proc_exec(cmd, argv);
+		if (proc_exec(cmd, argv) == 0)
+		{
+			printf("Successfully finished\n");
+			exit(1);
+		}
+		printf("Post Execution \n");
 	}
 }
 #endif /* FUNC_H */
