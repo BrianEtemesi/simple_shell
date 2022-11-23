@@ -17,7 +17,7 @@ void proc_exec(char *cmd, char *argv[])
 	int status;
 
 	/* Check to see if we have exit */
-	if (strcmp(cmd, "/bin/exit") == 0)
+	if (strcmp(cmd, "exit") == 0)
 	{
 		exit(1);
 	}
