@@ -29,7 +29,6 @@ int proc_exec(char *cmd, char *argv[])
 	if (strcmp(cmd, "/bin/exit") == 0)
 	{
 		printf("User Terminated\n");
-		return(1);
 		exit(1);
 	}
 	child_proc = fork();
@@ -40,7 +39,6 @@ int proc_exec(char *cmd, char *argv[])
 		if (execve(cmd, argv, NULL) == -1)
 		{
 			printf("Command Not Found\n");
-			return(1);
 			exit(EXIT_FAILURE);
 		}
 		sleep(1);
@@ -49,7 +47,6 @@ int proc_exec(char *cmd, char *argv[])
 	else if (child_proc == -1)
 	{
 		perror("Error\n");
-		return (1);
 		exit(1);
 	}
 	/* Return to parent process */
@@ -58,7 +55,6 @@ int proc_exec(char *cmd, char *argv[])
 		if (wait(&status) == -1)
 		{
 			perror("Error waiting for child id\n");
-			return(1);
 			exit(1);
 		}
 		else
@@ -119,7 +115,7 @@ void print_shell(char *buffer, size_t size)
 		if (proc_exec(cmd, argv) == 0)
 		{
 			printf("Successfully finished\n");
-			exit(1);
+			print_shell(buffer, size);
 		}
 		printf("Post Execution \n");
 	}
