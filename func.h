@@ -14,6 +14,7 @@
 void proc_exec(char *cmd, char *argv[])
 {
 	pid_t child_proc;
+	int status;
 
 	printf("Bash parent Process: [%d]\n", getppid());
 	/* Check to see if we have exit */
@@ -32,6 +33,7 @@ void proc_exec(char *cmd, char *argv[])
 			printf("Command Not Found\n");
 			exit(EXIT_FAILURE);
 		}
+		sleep(1);
 	}
 	/* Handle error */
 	else if (child_proc == -1)
@@ -42,7 +44,7 @@ void proc_exec(char *cmd, char *argv[])
 	/* Return to parent process */
 	else
 	{
-		wait(NULL);
+		wait(&status);
 		printf("Bash parent Process: [%d] and id [%d]\n", getppid(), child_proc);
 	}
 }
