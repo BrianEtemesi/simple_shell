@@ -73,7 +73,7 @@ void print_shell(char *buffer, size_t size)
 
 	buffer = (char *)malloc(sizeof(char) * BUFFSIZE);
 
-	for(;;)
+	for (;;)
 	{
 		/* Reset Pathname */
 		strcpy(pathname, "");
@@ -96,13 +96,9 @@ void print_shell(char *buffer, size_t size)
 
 		/* Execute process */
 		if (proc_exec(cmd, argv) == 0)
-		{
 			exit(1);
-		}
 		else
-		{
 			exit(1);
-		}
 	}
 }
 #endif /* FUNC_H */
