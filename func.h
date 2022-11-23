@@ -44,8 +44,14 @@ void proc_exec(char *cmd, char *argv[])
 	/* Return to parent process */
 	else
 	{
-		wait(&status);
+		if (wait(&status) == -1) 
+		{
+			perror("Error waiting for child id\n");
+		}
+		else
+		{
 		printf("Bash parent Process: [%d] and id [%d]\n", getppid(), child_proc);
+		}
 	}
 }
 
