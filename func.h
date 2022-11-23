@@ -16,18 +16,15 @@ void proc_exec(char *cmd, char *argv[])
 	pid_t child_proc;
 	int status;
 
-	printf("Bash parent Process: [%d]\n", getppid());
 	/* Check to see if we have exit */
-	if (strcmp(cmd, "/bin/exit") == 0)
+	if (strcmp(cmd, "exit") == 0)
 	{
-		printf("User Terminated\n");
 		exit(1);
 	}
 	child_proc = fork();
 	/* If Child process is created successfully, proceed to execute */
 	if (child_proc == 0)
 	{
-		printf("Child Process started: [%d]\n", getpid());
 		if (execve(cmd, argv, NULL) == -1)
 		{
 			printf("Command Not Found\n");
@@ -44,13 +41,9 @@ void proc_exec(char *cmd, char *argv[])
 	/* Return to parent process */
 	else
 	{
-		if (wait(&status) == -1) 
+		if (wait(&status) == -1)
 		{
 			perror("Error waiting for child id\n");
-		}
-		else
-		{
-		printf("Bash parent Process: [%d] and id [%d]\n", getppid(), child_proc);
 		}
 	}
 }
@@ -78,9 +71,8 @@ void print_shell(char *buffer, size_t size)
 
 	while (strcmp(buffer, "exit") != 0)
 	{
-		printf("Entering while loop\n");
 		/* Reset Pathname */
-		strcpy(pathname, "/bin/");
+		strcpy(pathname, "");
 		strcpy(cmd, "");
 
 		printf("$: ");
@@ -97,12 +89,9 @@ void print_shell(char *buffer, size_t size)
 
 		/* Concatenate to get full command e.g., /bin/ls */
 		strcpy(cmd, strcat(pathname, buffer));
-		printf("command sent : [%s]\n", cmd);
 
 		/* Execute process */
-		printf("Proceeding to execute within while\n");
 		proc_exec(cmd, argv);
-		printf("Post Execution \n");
 	}
 }
 #endif /* FUNC_H */
