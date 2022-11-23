@@ -13,6 +13,11 @@ int main(void)
 
 	/* Allocate space to buffer */
 	buffer = malloc(sizeof(char) * BUFFSIZE);
+	if (buffer == NULL)
+	{
+		perror("Error allocating size to buffer\n");
+		return (1);
+	}
 
 	print_shell(buffer, size);
 
