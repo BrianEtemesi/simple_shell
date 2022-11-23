@@ -69,7 +69,7 @@ void print_shell(char *buffer, size_t size)
 
 	buffer = (char *)malloc(sizeof(char) * BUFFSIZE);
 
-	while (strcmp(buffer, "exit") != 0)
+	while (1)
 	{
 		/* Reset Pathname */
 		strcpy(pathname, "");
