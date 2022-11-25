@@ -15,7 +15,8 @@ int main(void)
 
 	do {
 		/* Print a promt */
-		printf("$: ");
+		if (isatty(0) == 1)
+			printf("$: ");
 
 		/* Read Line and store in buffer */
 		buffer = read_line();
