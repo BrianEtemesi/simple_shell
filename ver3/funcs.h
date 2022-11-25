@@ -1,5 +1,5 @@
-#ifndef READ_H
-#define READ_H
+#ifndef FUNCS_H
+#define FUNCS_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,13 +32,13 @@ char *read_line()
 	}
 
 	/* Read Character Loop */
-	while (1) //true
+	while (1)
 	{
 		/* Read Character */
 		c = getchar();
 
 		/* Check for EOF */
-		if (c == EOF || c =='\n')
+		if (c == EOF || c == '\n')
 		{
 			buffer[position] = '\0';
 
@@ -61,7 +61,7 @@ char *read_line()
 	/* Memory Reallocation */
 	if (position >= buffsize)
 	{
-		buffsize += BUFFSIZE; 
+		buffsize += BUFFSIZE;
 		buffer = (char *)realloc(buffer, buffsize);
 
 		/* NULL Buffer Check */
@@ -100,7 +100,6 @@ char **tokenize(char *buffer)
 	{
 		tokens[position] = token;
 		position++;
-	
 
 		/* Memory Reallcoation */
 		if (position >= buffsize)
@@ -116,13 +115,14 @@ char **tokenize(char *buffer)
 	token = strtok(NULL, TOK_DELIM);
 	}
 	tokens[position] = NULL;
-	return tokens;
+	return (tokens);
 }
 
 /**
  * proc_exe- Function that handles process execution
  * @args: Arguments to act on
  *
+ * Return: (1) on Success
  */
 int proc_exe(char **args)
 {
@@ -137,7 +137,7 @@ int proc_exe(char **args)
 	{
 		/* Print argument received from tokenize() */
 		printf("Args[0] received: [%s]\n", args[0]);
-		
+
 		/* Print arguments that are being passed to argument vector */
 		while (*args)
 		{
@@ -154,8 +154,6 @@ int proc_exe(char **args)
 			perror("Error Encountered while executing");
 			exit(1);
 		}
-
-		
 	}
 
 	/* Handle Error (< 0)*/
@@ -168,12 +166,10 @@ int proc_exe(char **args)
 	/* Return to parent process */
 	else
 	{
-		do
-		{
-			wpid = waitpid(pid, &status, WUNTRACED);
-
-		} while(!WIFEXITED(status) && !WIFSIGNALED(status));
+		do {
+			wpid = waitpid (pid, &status, WUNTRACED);
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 	return (1);
 }
-#endif /* READ_H */
+#endif /* FUNCS_H */
