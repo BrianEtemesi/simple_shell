@@ -110,7 +110,7 @@ char **tokenize(char *buffer)
  */
 int proc_exe(char **args)
 {
-	pid_t pid, wpid __attribute__((unused));
+	pid_t pid;
 	int status;
 
 	pid = fork();
@@ -134,7 +134,7 @@ int proc_exe(char **args)
 	else
 	{
 		do {
-			wpid = waitpid(pid, &status, WUNTRACED);
+			waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 	return (1);
