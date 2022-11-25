@@ -30,40 +30,27 @@ char *read_line()
 		perror("Buffer Allocation Error\n");
 		exit(1);
 	}
-
 	/* Read Character Loop */
 	while (1)
 	{
-		/* Read Character */
 		c = getchar();
-
-		/* Check for EOF */
 		if (c == EOF || c == '\n')
 		{
 			buffer[position] = '\0';
-
-			/* Do a check so that we don't return (null) when pressing Ctrl + D*/
 			if (*buffer == '\0')
-			{
-				printf("Buffer has nothing\n");
 				exit(1);
-			}
 			else
 				return (buffer);
 		}
 		else
-		{
 			buffer[position] = c;
-		}
 		position++;
 	}
-
 	/* Memory Reallocation */
 	if (position >= buffsize)
 	{
 		buffsize += BUFFSIZE;
 		buffer = (char *)realloc(buffer, buffsize);
-
 		/* NULL Buffer Check */
 		if (!buffer)
 		{
@@ -71,7 +58,6 @@ char *read_line()
 			exit(1);
 		}
 	}
-
 	return (buffer);
 }
 
@@ -85,7 +71,6 @@ char **tokenize(char *buffer)
 {
 	int buffsize = BUFFSIZE, position = 0;
 	char **tokens = (char **)malloc(sizeof(char *) * buffsize);
-	/* tokens = list of strings (arguments) --> arguments == string (char *) */
 	char *token;
 
 	/* NULL Check for tokens */
@@ -94,7 +79,6 @@ char **tokenize(char *buffer)
 		perror("Error Allocating Memory\n");
 		exit(1);
 	}
-
 	token = strtok(buffer, TOK_DELIM);
 	while (token != NULL)
 	{
@@ -126,32 +110,15 @@ char **tokenize(char *buffer)
  */
 int proc_exe(char **args)
 {
-
-	pid_t pid, wpid;
+	pid_t pid, wpid __attribute__((unused));
 	int status;
-	char **args_cpy = args;
-
 
 	pid = fork();
 	if (pid == 0)
 	{
-		/* Print argument received from tokenize() */
-		printf("Args[0] received: [%s]\n", args[0]);
-
-		/* Print arguments that are being passed to argument vector */
-		while (*args)
-		{
-			printf("Proceeding to execute with arg: [%s]\n", args[1]);
-			args++;
-		}
-
-		/* Reset args ptr */
-		args = args_cpy;
-
-		/* Start Execution */
 		if (execve(args[0], args, NULL) == -1)
 		{
-			perror("Error Encountered while executing");
+			perror("Error Encountered while executing\n");
 			exit(1);
 		}
 	}
