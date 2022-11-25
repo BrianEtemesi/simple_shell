@@ -14,7 +14,9 @@ int main(void)
 	int status = 0;
 
 	do {
-		printf("$: ");
+		if (isatty(0) == 1)
+			printf("$: ");
+
 		buffer = read_line();
 		args = tokenize(buffer);
 		args_cpy = args;

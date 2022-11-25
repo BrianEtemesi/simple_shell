@@ -127,7 +127,7 @@ char **tokenize(char *buffer)
 int proc_exe(char **args)
 {
 
-	pid_t pid, wpid;
+	pid_t pid, wpid __attribute__((unused));
 	int status;
 	char **args_cpy = args;
 
