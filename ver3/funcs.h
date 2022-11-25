@@ -167,7 +167,7 @@ int proc_exe(char **args)
 	else
 	{
 		do {
-			wpid = waitpid (pid, &status, WUNTRACED);
+			wpid = waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 	return (1);
