@@ -28,13 +28,13 @@ int main(void)
 		/* Copy pointer address of initial args */
 		args_cpy = args;
 
-		/* Print Every Argument */
+		/* Check for exit */
 		while (*args)
 		{
-		printf("Args: [%s]\n", *args);
+			if (strcmp(*args, "exit") == 0)
+				exit(1);
 		args++;
 		}
-
 		/* Reset args pointer back to original */
 		args = args_cpy;
 
