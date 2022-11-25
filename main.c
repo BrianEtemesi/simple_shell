@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "funcs.h"
 #include "prototypes.h"
 
@@ -9,13 +10,26 @@
 int main(void)
 {
 	char *buffer;
-	char **args;
+	char **args, **args_cpy;
 	int status = 0;
 
 	do {
 		printf("$: ");
 		buffer = read_line();
 		args = tokenize(buffer);
+		args_cpy = args;
+
+		/* Check for exit */
+		while (*args)
+		{
+			if (strcmp(*args, "exit") == 0)
+				exit(1);
+		args++;
+		}
+
+		/* Reset args pointer back to original */
+		args = args_cpy;
+
 		status = proc_exe(args);
 
 	} while (status);
