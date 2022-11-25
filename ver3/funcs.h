@@ -41,6 +41,7 @@ char *read_line()
 		if (c == EOF || c =='\n')
 		{
 			buffer[position] = '\0';
+
 			/* Do a check so that we don't return (null) when pressing Ctrl + D*/
 			if (*buffer == '\0')
 			{
@@ -128,19 +129,26 @@ int proc_exe(char **args)
 
 	pid_t pid, wpid;
 	int status;
+	char **args_cpy = args;
 
 
 	pid = fork();
 	if (pid == 0)
 	{
-		/* Process Execution with execve */
+		/* Print argument received from tokenize() */
 		printf("Args[0] received: [%s]\n", args[0]);
-		if (args[0] == NULL)
+		
+		/* Print arguments that are being passed to argument vector */
+		while (*args)
 		{
-			printf("Received Null\n");
-			exit(1);
+			printf("Proceeding to execute with arg: [%s]\n", args[1]);
+			args++;
 		}
-		printf("Proceeding to execute\n");
+
+		/* Reset args ptr */
+		args = args_cpy;
+
+		/* Start Execution */
 		if (execve(args[0], args, NULL) == -1)
 		{
 			perror("Error Encountered while executing");
