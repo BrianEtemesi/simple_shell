@@ -145,6 +145,6 @@ int proc_exe(char **args)
 			waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	return (1);
+	return (0);
 }
 #endif /* FUNCS_H */
