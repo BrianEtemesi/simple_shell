@@ -38,7 +38,14 @@ int main(void)
 		/* Reset args pointer back to original */
 		args = args_cpy;
 
-		status = proc_exe(args);
+		/* Check for status based on return of proc_exe() */
+		if (proc_exe(args) == 0)
+			status = 1;
+		else
+			status = 0;
+
+		/* Print status*/
+		printf("status is: [%d]\n", status);
 
 	} while (status);
 
