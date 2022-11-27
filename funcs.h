@@ -112,8 +112,7 @@ int proc_exe(char **args)
 {
 	pid_t pid;
 	int status;
-	char *envp[] = 
-	{
+	char *envp[] = {
 	"HOME=/",
 	"PATH=/bin:/usr/bin:/usr/local/bin:/usr/local/sbin",
 	"TZ=UTC0",
