@@ -32,7 +32,7 @@ int main(void)
 		while (*args)
 		{
 			if (strcmp(*args, "exit") == 0)
-				exit(1);
+				exit(0);
 		args++;
 		}
 		/* Reset args pointer back to original */
