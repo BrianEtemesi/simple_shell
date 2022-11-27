@@ -35,6 +35,10 @@ int main(void)
 		status = proc_exe(args);
 
 	} while (status);
+	
+	/* Free memory */
+	free(buffer);
+	free(args);
 
 	return (0);
 }
