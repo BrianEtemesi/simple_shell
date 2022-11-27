@@ -130,6 +130,15 @@ int proc_exe(char **args)
 	pid_t pid, wpid __attribute__((unused));
 	int status;
 	char **args_cpy = args;
+	char *envp[] = 
+	{
+	"HOME=/",
+	"PATH=/bin:/usr/bin:/usr/local/bin:/usr/local/sbin",
+	"TZ=UTC0",
+	"USER=BabyPanda",
+	"LOGNAME=tarzan",
+	0
+	};
 
 
 	pid = fork();
@@ -149,7 +158,7 @@ int proc_exe(char **args)
 		args = args_cpy;
 
 		/* Start Execution */
-		if (execve(args[0], args, NULL) == -1)
+		if (execve(args[0], args, envp) == -1)
 		{
 			perror("Error Encountered while executing");
 			exit(1);

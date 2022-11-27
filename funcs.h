@@ -112,11 +112,19 @@ int proc_exe(char **args)
 {
 	pid_t pid;
 	int status;
+	char *envp[] = {
+	"HOME=/",
+	"PATH=/bin:/usr/bin:/usr/local/bin:/usr/local/sbin",
+	"TZ=UTC0",
+	"USER=BabyPanda",
+	"LOGNAME=tarzan",
+	0
+	};
 
 	pid = fork();
 	if (pid == 0)
 	{
-		if (execve(args[0], args, NULL) == -1)
+		if (execve(args[0], args, envp) == -1)
 		{
 			perror("Error Encountered while executing\n");
 			exit(1);
