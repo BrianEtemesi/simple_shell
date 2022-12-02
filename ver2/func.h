@@ -77,7 +77,10 @@ void print_shell(char *buffer, size_t size)
 	{
 		/* Reset Pathname */
 		strcpy(pathname, "");
+<<<<<<< HEAD:ver2/func.h
 		strcpy(cmd, "");
+=======
+>>>>>>> 63b0a40 (Fixed some errors):func.h
 
 		printf("$: ");
 
